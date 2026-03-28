@@ -17,7 +17,9 @@ await connectDB()
 await connectCloudinary()
 
 // Middlewares
-app.use(cors())
+app.use(cors({
+  origin: '*','https://lms-full-project-mu.vercel.app/'
+}))
 app.use(clerkMiddleware())
 
 // Routes
