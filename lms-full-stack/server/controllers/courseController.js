@@ -2,19 +2,21 @@ import Course from "../models/Course.js"
 
 
 // Get All Courses
+
 export const getAllCourse = async (req, res) => {
     try {
+
         const courses = await Course.find({ isPublished: true })
             .select(['-courseContent', '-enrolledStudents'])
-            .populate({ path: 'educator', select: '-password' });
+            .populate({ path: 'educator', select: '-password' })
 
-        res.json({ success: true, courses });
+        res.json({ success: true, courses })
 
     } catch (error) {
-        console.error("ERROR:", error); // 🔥 ADD THIS
-        res.status(500).json({ success: false, message: error.message });
+        res.json({ success: false, message: error.message })
     }
-};
+
+}
 // Get Course by Id
 export const getCourseId = async (req, res) => {
 
