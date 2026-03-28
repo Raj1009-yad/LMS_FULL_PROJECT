@@ -40,23 +40,13 @@ app.use(express.json())
 app.get('/', (req, res) => {
   res.send("API Working")
 })
-
-// Webhooks (important: raw before json)
-app.post('/clerk', express.json(), clerkWebhooks)
+// Routes
+app.get('/', (req, res) => res.send("API Working"))
+app.post('/clerk', express.json() , clerkWebhooks)
 app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks)
+app.use('/api/educator', express.json(), educatorRouter)
+app.use('/api/course', express.json(), courseRouter)
+app.use('/api/user', express.json(), userRouter)
 
-// API Routes
-app.use('/api/educator', educatorRouter)
-app.use('/api/course', courseRouter)
-app.use('/api/user', userRouter)
 
-// ✅ EXPORT for Vercel (NO app.listen)
-export default async function handler(req, res) {
-  try {
-    await initConnections();
-    return app(req, res);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Server Error" });
-  }
-}
+export default app;
