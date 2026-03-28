@@ -18,7 +18,9 @@ await connectCloudinary()
 
 // Middlewares
 app.use(cors({
-  origin: '*','https://lms-full-project-mu.vercel.app/'
+  origin: '*','https://lms-full-project-mu.vercel.app/',
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }))
 app.use(clerkMiddleware())
 
