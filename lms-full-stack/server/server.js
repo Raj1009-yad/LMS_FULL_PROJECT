@@ -24,7 +24,7 @@ const initConnections = async () => {
 
 // ✅ CORS FIX
 app.use(cors({
-  origin: "https://lms-full-project-mu.vercel.app",
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }))
